@@ -1,0 +1,5 @@
+name = Role Provisioner
+description = Provides a method for defining roles and permissions in YAML files
+core = 7.x
+
+dependencies[] = xautoload
