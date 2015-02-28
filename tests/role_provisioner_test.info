@@ -1,0 +1,6 @@
+name = Role Provisioner Test
+description = Testing module for Travis CI
+core = 7.x
+hidden = true
+
+files[] = role_provisioner_test.test

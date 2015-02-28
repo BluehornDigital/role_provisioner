@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Tests for Role Provisioner.
+ */
+
+use Drupal\role_provisioner_test\RoleProvisionerTest;
+
+/**
+ * Test role provisioner
+ */
+class RoleProvisionerTestCase extends DrupalWebTestCase {
+  /**
+   * @var RoleProvisionerTest
+   */
+  protected $provisioner;
+
+  /**
+   * Implements getInfo().
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Role provisioner test',
+      'description' => 'Tests the provisioner class',
+      'group' => 'Role provisioner',
+    );
+  }
+
+  /**
+   * Implements setUp().
+   */
+  function setUp() {
+    $this->provisioner = new RoleProvisionerTest();
+    parent::setUp(array(
+      'libraries',
+      'xautoload',
+    ));
+  }
+
+  /**
+   * Test role provisioning.
+   */
+  function testRoleProvision() {
+    $this->provisioner->ensureRoles();
+
+    $role = user_role_load_by_name('editor');
+    if (!$role) {
+      $this->fail('Failed to create role');
+    }
+    $this->assertText($role->name, 'site editor');
+  }
+
+  /**
+   * Test permission provisioning.
+   */
+  function testPermissionsProvision() {
+    $this->provisioner->ensurePermissions();
+
+    $role = user_role_load_by_name('site editor');
+    $permissions = user_role_permissions(array($role->rid => $role));
+
+    $this->assertTrue($permissions[$role->rid]['administer nodes']);
+  }
+}

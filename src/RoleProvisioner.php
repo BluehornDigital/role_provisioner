@@ -49,7 +49,7 @@ class RoleProvisioner {
    * @return string
    */
   public function getPath() {
-    return drupal_get_path('profile', 'financials_saas') . '/config';
+    return drupal_get_path('module', 'role_provisioner') . '/config';
   }
 
   public function getACL() {
