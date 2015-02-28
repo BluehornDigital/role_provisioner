@@ -1,4 +1,4 @@
-# Role Provisioner
+# Role Provisioner [![Build Status](https://travis-ci.org/mglaman/role_provisioner.svg)](https://travis-ci.org/mglaman/role_provisioner)
 
 Provides Drupal 7 with an OOP based based of controlling roles and permissions via YAML files
 
