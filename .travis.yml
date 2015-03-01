@@ -24,7 +24,9 @@ install:
   - mysql -e "create database drupal;"
 
   # Install Drush
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - composer global require --prefer-source --no-interaction drush/drush:dev-master
+  - drush cc drush
 
   # Install Drupal
   - drush make --debug --yes tests/role_provisioner_test.make.yml build
