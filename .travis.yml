@@ -42,3 +42,6 @@ before_script:
   - drush dis -y dblog
   - drush en -y libraries xautoload role_provisioner
   - drush en -y simpletest
+
+script:
+  - drush test-run --uri=http://127.0.0.1:8080 'Role provisioner' --xml --format=yaml
