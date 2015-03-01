@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\role_provisioner_test;
+namespace Drupal\role_provisioner\Tests;
 
 use Drupal\role_provisioner\RoleProvisioner;
 
@@ -13,6 +13,6 @@ class RoleProvisionerTest extends RoleProvisioner {
    * @inheritdoc
    */
   public function getPath() {
-    return drupal_get_path('module', 'role_provisioner_test') . '/config';
+    return drupal_get_path('module', 'role_provisioner') . '/tests/config';
   }
 }

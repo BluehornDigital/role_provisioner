@@ -8,7 +8,7 @@ This module provides a base for handling roles and permissions. The *RoleProvisi
 
 ### Extending the provisioner
 
-@todo!
+@todo! For now look at test example \Drupal\role_provisioner\Tests\RoleProvisionerTest.
 
 ### Defining roles and permissions as YAML files
 

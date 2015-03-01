@@ -5,12 +5,12 @@
  * Tests for Role Provisioner.
  */
 
-use Drupal\role_provisioner_test\RoleProvisionerTest;
+namespace Drupal\role_provisioner\Tests;
 
 /**
  * Test role provisioner
  */
-class RoleProvisionerTestCase extends DrupalWebTestCase {
+class RoleProvisionerWebTestCase extends \DrupalWebTestCase {
   /**
    * @var RoleProvisionerTest
    */
@@ -44,11 +44,19 @@ class RoleProvisionerTestCase extends DrupalWebTestCase {
   function testRoleProvision() {
     $this->provisioner->ensureRoles();
 
-    $role = user_role_load_by_name('editor');
-    if (!$role) {
-      $this->fail('Failed to create role');
+    // Test that the role was created.
+    $roles = user_roles();
+    $this->assertTrue(in_array('editor', $roles));
+
+    // Load the role itself
+    $editor = user_role_load_by_name('editor');
+    if (!$editor) {
+      $this->fail('Failed to load role by name');
     }
-    $this->assertText($role->name, 'site editor');
+    $this->assertTrue(
+      ($editor->name == 'editor'),
+      'Editor role name was not set properly.'
+    );
   }
 
   /**
@@ -56,10 +64,9 @@ class RoleProvisionerTestCase extends DrupalWebTestCase {
    */
   function testPermissionsProvision() {
     $this->provisioner->ensurePermissions();
+    $roles = user_roles(false, 'administer nodes');
 
-    $role = user_role_load_by_name('site editor');
-    $permissions = user_role_permissions(array($role->rid => $role));
-
-    $this->assertTrue($permissions[$role->rid]['administer nodes']);
+    // Test the provisioned role has administer nodes permission.
+    $this->assertTrue(in_array('editor', $roles));
   }
 }
