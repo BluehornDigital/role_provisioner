@@ -29,7 +29,7 @@ install:
   - drush cc drush
 
   # Install Drupal
-  - drush make --debug --yes tests/role_provisioner_test.make.yml build
+  - drush make --debug --yes role_provisioner/tests/role_provisioner_test.make.yml build
   - mv role_provisioner build/sites/all/modules
 
   - echo sendmail_path=`which true` >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
